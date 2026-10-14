@@ -1,95 +1,97 @@
 # FreshPulse — Store Operations Intelligence
 
-**An intelligent retail analytics dashboard that helps store managers identify operational problems, prioritize corrective actions, and make data-driven decisions.**
+FreshPulse is a simple, modern, professional web application designed for retail store operations managers. It tracks store performance, detects inventory shortages and wastage surges, and organizes operational decisions into actionable tasks.
 
-## About the Project
+---
 
-FreshPulse is a web-based Store Operations Intelligence platform designed to help retail managers monitor store performance and detect issues related to sales, inventory, wastage, deliveries, and staffing.
+## 🚀 Key Sections
 
-Instead of simply displaying reports, FreshPulse helps managers understand which problems require attention first and provides actionable recommendations based on operational risk and potential business impact.
+The application is streamlined into three essential sections:
 
-## Problem Statement
+1. **Dashboard**
+   - High-level network metrics: Total Sales, Transactions, Footfall, Stock Levels, Wastage, and Delayed Deliveries.
+   - Immediate operational alert cards:
+     - **Stock Shortages**: Highlights stores with low buffer (<0.35x coverage) or zero stock.
+     - **Wastage Alerts**: Highlights stores with elevated spoilage (>6%).
+     - **Delayed Deliveries**: Highlights shipments behind schedule.
+   - Clean, readable graphs: Store Sales vs. Footfall, and Inventory Coverage vs. Wastage Rate.
+   - Interactive Stores Overview table with quick search, filtering, and one-click navigation to store details.
 
-Retail store managers often deal with large amounts of operational data across multiple stores. Identifying critical issues, understanding their impact, and deciding which problem to resolve first can be time-consuming.
+2. **Store Details**
+   - Detailed performance analysis for individual stores.
+   - **Confirmed Facts vs. Possible Explanations**: Distinguishes verified numbers from hypothetical causes to verify.
+   - Key operational indicators: Sales, Average Basket Size, Conversion Rate, Available Stock, Days of Stock Remaining, Wastage Percentage, Staffing, and Delivery Status.
+   - Practical recommendations with direct action approval controls.
 
-FreshPulse aims to simplify this process by bringing store metrics, risk detection, investigation, and recommended actions into one dashboard.
+3. **Tasks and Actions**
+   - Centralized task queue for operational interventions.
+   - Status transitions: **Pending** → **Approved** → **Completed** (or **Rejected**).
+   - Filter by status and store.
+   - User action updates persist in your browser session automatically.
 
-## Key Features
+---
 
-- **Performance Dashboard:** Monitor sales, transactions, customer footfall, inventory, wastage, and delayed deliveries.
-- **Risk Detection:** Identify potential stock shortages, elevated wastage, and delivery delays.
-- **Priority-Based Analysis:** Help managers identify which operational issues need attention first.
-- **Store-Level Investigation:** Examine individual store performance and distinguish confirmed facts from possible explanations.
-- **Actionable Recommendations:** Review suggested operational interventions.
-- **Task Management:** Track tasks through Pending, Approved, Completed, or Rejected statuses.
-- **Manual Data Entry:** Enter and save store records.
-- **CSV Upload:** Import store data for analysis.
-- **Demo Data:** Explore the interface using illustrative synthetic data.
+## 📥 Data Entry & Management
 
-## Technology Stack
+FreshPulse provides three simple ways to load store data:
 
-- React 19
-- TypeScript
-- Vite
-- Tailwind CSS
-- Recharts
-- Papa Parse
-- React Router
-- React Context API
-- LocalStorage
-- Vitest
+1. **Manual Entry**: Simple, user-friendly form with inline validation and non-negative number support (valid zeros are preserved).
+   - **Save Store**: Saves the store record into local storage without triggering analysis automatically, displays confirmation, and refreshes the saved store list.
+   - **Analyze Store**: Validates input, displays "Analyzing store data...", calls `analyzeAll(input)`, and loads the dashboard.
+   - **Reset**: Clears form fields and error indicators.
+2. **CSV Upload**: Drag-and-drop CSV file upload with instant column detection, error checking, and a downloadable clean CSV template (headers only).
+3. **Load Demo Data**: Optional illustrative sample dataset (clearly labeled "Synthetic demonstration data") to explore the interface, with one-click reset.
 
-## Getting Started
+---
 
-### Prerequisites
+## 💾 Local Storage Architecture
 
-Install Node.js and npm on your computer.
+Saved stores are managed via `src/store/storeStore.ts`:
+- `getSavedStores()`
+- `saveStore(store)`
+- `updateStore(store)`
+- `deleteStore(storeId)`
 
-### Installation
+*Note on Local Storage:* Data is stored locally in the current browser and device session. It does not provide cross-device synchronization or centralized database persistence.
 
-1. Clone the repository:
+---
 
-   `git clone https://github.com/meghashreenm2006/FreshPulse.git`
+## 🛠️ Technology Stack
 
-2. Open the project directory:
+- **Frontend:** React 19, TypeScript, Vite
+- **Styling:** Tailwind CSS v4 (Clean modern SaaS aesthetic, responsive layouts)
+- **Visualizations:** Recharts
+- **CSV Engine:** Papa Parse
+- **Routing & State:** React Router, React Context API, LocalStorage persistence
+- **Icons:** Lucide React
+- **Testing:** Vitest
 
-   `cd FreshPulse`
+---
 
-3. Install dependencies:
+## 💻 Setup & Running Instructions
 
-   `npm install`
+### 1. Install Dependencies
+```bash
+npm install
+```
 
-4. Start the development server:
+### 2. Start Development Server
+```bash
+npm run dev
+```
+The application will be accessible at `http://localhost:3000`.
 
-   `npm run dev`
+### 3. Run Unit Tests
+```bash
+npm run test
+```
 
-5. Open the local URL displayed in your terminal.
+### 4. Build for Production
+```bash
+npm run build
+```
 
-## How It Works
+---
 
-1. Enter store information manually or upload a CSV file.
-2. Analyze the available operational data.
-3. Review performance metrics and detected risks.
-4. Investigate the affected store.
-5. Review recommendations and prioritize corrective actions.
-6. Track operational tasks through their completion status.
-
-## Data Storage
-
-Saved store records and task updates use browser-based local storage. Data is not automatically synchronized across different devices or users.
-
-## Project Objective
-
-To make retail operations more transparent and actionable by helping managers identify critical problems, understand potential business impact, and prioritize interventions efficiently.
-
-## Future Enhancements
-
-- Centralized database integration
-- Multi-user access and role-based permissions
-- Predictive sales and inventory analytics
-- Real-time store data integration
-- Enhanced risk prioritization and impact estimation
-
-## License
-
-Apache License 2.0
+## 📄 License
+Apache-2.0
